@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "inicio": "Home",
+    "citas": "Appointments",
+    "facturas": "Invoices",
+    "gastos": "Expenses"
+  },
+  "login": {
+    "wordmark": "Autonomas",
+    "tagline": "Your financial management, simplified",
+    "signInButton": "Continue with Google",
+    "loading": "Signing in..."
+  },
+  "offline": {
+    "title": "No connection",
+    "message": "Check your internet connection and try again.",
+    "retry": "Retry"
+  },
+  "session": {
+    "conflictTitle": "Session active on another device",
+    "conflictMessage": "Your account is active on another device. Would you like to use it here?",
+    "useHere": "Use here",
+    "close": "Sign out"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You do not have permission to perform this action.",
+    "notFound": "The requested resource was not found.",
+    "driveUnavailable": "Google Drive is unavailable. Check the app permissions.",
+    "refreshToken": "Your session has expired. Please sign in again."
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "confirm": "Confirm",
+    "back": "Back"
+  },
+  "common": {
+    "loading": "Loading...",
+    "noResults": "No results",
+    "required": "Required field"
+  }
+}

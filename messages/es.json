@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "inicio": "Inicio",
+    "citas": "Citas",
+    "facturas": "Facturas",
+    "gastos": "Gastos"
+  },
+  "login": {
+    "wordmark": "Autonomas",
+    "tagline": "Tu gestión financiera, sin complicaciones",
+    "signInButton": "Continuar con Google",
+    "loading": "Iniciando sesión..."
+  },
+  "offline": {
+    "title": "Sin conexión",
+    "message": "Comprueba tu conexión a internet e inténtalo de nuevo.",
+    "retry": "Reintentar"
+  },
+  "session": {
+    "conflictTitle": "Sesión activa en otro dispositivo",
+    "conflictMessage": "Tu cuenta está activa en otro dispositivo. ¿Quieres usarla aquí?",
+    "useHere": "Usar aquí",
+    "close": "Cerrar sesión"
+  },
+  "errors": {
+    "generic": "Algo ha ido mal. Inténtalo de nuevo.",
+    "unauthorized": "No tienes permiso para realizar esta acción.",
+    "notFound": "No se ha encontrado el recurso solicitado.",
+    "driveUnavailable": "Google Drive no está disponible. Comprueba los permisos de la aplicación.",
+    "refreshToken": "Tu sesión ha caducado. Por favor, vuelve a iniciar sesión."
+  },
+  "actions": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Añadir",
+    "confirm": "Confirmar",
+    "back": "Volver"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "noResults": "Sin resultados",
+    "required": "Campo obligatorio"
+  }
+}
