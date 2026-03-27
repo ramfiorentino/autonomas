@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 import withPWA from "next-pwa";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const pwaConfig = withPWA({
   dest: "public",
@@ -10,7 +13,7 @@ const pwaConfig = withPWA({
 });
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {}, // acknowledge Turbopack; next-pwa webpack config only runs in production builds
 };
 
-export default pwaConfig(nextConfig);
+export default pwaConfig(withNextIntl(nextConfig));
