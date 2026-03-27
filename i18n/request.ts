@@ -1,13 +1,10 @@
 import { getRequestConfig } from "next-intl/server";
-import { auth } from "@/auth";
+import { cookies } from "next/headers";
 import { defaultLocale, locales, type Locale } from "@/i18n";
 
 export default getRequestConfig(async () => {
-  const session = await auth();
-
-  // Locale from session settings, fallback to default
-  const rawLocale = (session as { settings?: { locale?: string } } | null)
-    ?.settings?.locale;
+  const cookieStore = await cookies();
+  const rawLocale = cookieStore.get("locale")?.value;
   const locale: Locale =
     rawLocale && locales.includes(rawLocale as Locale)
       ? (rawLocale as Locale)
