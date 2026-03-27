@@ -44,5 +44,152 @@
     "loading": "Cargando...",
     "noResults": "Sin resultados",
     "required": "Campo obligatorio"
+  },
+  "invoices": {
+    "title": "Facturas",
+    "newInvoice": "Nueva factura",
+    "empty": "Todavía no tienes facturas",
+    "emptySubtitle": "Crea tu primera factura para empezar",
+    "search": "Buscar por cliente o número",
+    "filterState": "Estado",
+    "filterQuarter": "Trimestre",
+    "allStates": "Todos",
+    "allQuarters": "Todos",
+    "states": {
+      "draft": "Borrador",
+      "issued": "Emitida",
+      "paid": "Cobrada",
+      "rectified": "Rectificada"
+    },
+    "quarters": {
+      "q1": "T1",
+      "q2": "T2",
+      "q3": "T3",
+      "q4": "T4"
+    },
+    "form": {
+      "title": "Nueva factura",
+      "issuerSection": "Emisor",
+      "issuerName": "Nombre / Razón social",
+      "issuerNif": "NIF / CIF",
+      "issuerAddress": "Dirección fiscal",
+      "clientSection": "Cliente",
+      "clientName": "Nombre del cliente",
+      "clientNif": "NIF / CIF del cliente",
+      "clientAddress": "Dirección del cliente",
+      "clientType": "Tipo de cliente",
+      "individual": "Particular",
+      "business": "Empresa / Profesional",
+      "serviceSection": "Servicio",
+      "description": "Descripción del servicio",
+      "amount": "Base imponible (€)",
+      "issueDate": "Fecha de emisión",
+      "simplificada": "Factura simplificada",
+      "simplificadaHint": "Disponible para importes ≤ €400",
+      "summarySection": "Resumen",
+      "baseAmount": "Base imponible",
+      "ivaExempt": "IVA exento — Art. 20 LIVA",
+      "ivaRate": "IVA (21%)",
+      "irpfLabel": "IRPF ({rate}%)",
+      "total": "Total",
+      "issueButton": "Emitir factura",
+      "issuing": "Emitiendo...",
+      "saveAsDraft": "Guardar borrador",
+      "rectificaBanner": "Rectificativa de {number}",
+      "correctionReason": "Motivo de la corrección",
+      "correctionReasonPlaceholder": "Describe el motivo de la corrección"
+    },
+    "detail": {
+      "viewPdf": "Ver PDF",
+      "markPaid": "Marcar como cobrada",
+      "issueRectificativa": "Emitir rectificativa",
+      "issueInvoice": "Emitir factura",
+      "issuedAt": "Fecha de emisión",
+      "paidAt": "Fecha de cobro"
+    },
+    "errors": {
+      "loadFailed": "No se pudieron cargar las facturas",
+      "saveFailed": "No se pudo guardar la factura",
+      "pdfFailed": "No se pudo generar el PDF",
+      "uploadFailed": "No se pudo subir el PDF a Drive",
+      "retry": "Reintentar"
+    }
+  },
+  "dashboard": {
+    "greeting": "Hola, {name}",
+    "irpfCard": {
+      "label": "Estimación IRPF",
+      "quarter": "T{quarter} {year}",
+      "disclaimer": "Estimación orientativa. Confirma con tu gestor."
+    },
+    "deadlineCard": {
+      "label": "Próximo plazo",
+      "q1": "Modelo 130 — T1",
+      "q2": "Modelo 130 — T2",
+      "q3": "Modelo 130 — T3",
+      "q4": "Modelo 130 — T4",
+      "daysRemaining": "{days} días"
+    },
+    "appointments": {
+      "title": "Citas pendientes",
+      "empty": "No hay citas pendientes",
+      "seeAll": "Ver todas"
+    },
+    "quarterSummary": {
+      "income": "Ingresos",
+      "expenses": "Gastos"
+    },
+    "quickActions": {
+      "newInvoice": "Nueva factura",
+      "scanReceipt": "Escanear recibo",
+      "upgradeRequired": "Función de pago",
+      "upgradeMessage": "Actualiza tu plan para escanear recibos automáticamente.",
+      "upgradeCta": "Ver planes"
+    },
+    "error": "No se pudo actualizar los datos",
+    "retry": "Reintentar"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Elige tu idioma",
+      "subtitle": "Puedes cambiarlo más adelante en ajustes"
+    },
+    "step2": {
+      "title": "Conecta tu cuenta de Google",
+      "subtitle": "Autonomas necesita acceso a Google Drive y Google Calendar para funcionar",
+      "driveExplain": "Guardamos tus facturas y gastos de forma segura en tu propio Google Drive. Nadie más tiene acceso.",
+      "calendarExplain": "Sincronizamos tus citas con Google Calendar para que estés siempre al día.",
+      "continueButton": "Continuar",
+      "signInButton": "Continuar con Google",
+      "driveError": "Necesitamos acceso a Google Drive para guardar tus facturas.",
+      "grantPermission": "Dar permiso"
+    },
+    "step3": {
+      "title": "Cuéntanos sobre tu actividad",
+      "subtitle": "Esto nos permite calcular correctamente tus impuestos",
+      "activityTitle": "Tipo de actividad",
+      "medicalTitle": "Servicios médicos / sanitarios",
+      "medicalDescription": "Exento de IVA — sin Modelo 303",
+      "otherTitle": "Otros servicios profesionales",
+      "otherDescription": "21% IVA — Modelo 303 trimestral",
+      "irpfTitle": "Retención IRPF",
+      "irpf15Title": "15% — Tipo general",
+      "irpf15Description": "Para autónomos con más de 3 años de actividad",
+      "irpf7Title": "7% — Nuevo autónomo",
+      "irpf7Description": "Para los primeros 3 años de actividad",
+      "irpfTooltipTrigger": "¿Cuál me aplica?",
+      "irpfTooltipBody": "El tipo reducido del 7% está disponible para autónomos que se hayan dado de alta por primera vez o que no hayan ejercido actividad en los últimos 2 años. Se aplica durante los primeros 3 años.",
+      "ctaButton": "Empezar",
+      "loading": "Configurando tu espacio..."
+    },
+    "error": {
+      "title": "No hemos podido crear tu espacio",
+      "retryButton": "Reintentar",
+      "grantPermissionButton": "Dar permiso a Google Drive",
+      "drivePermission": "Comprueba que has concedido acceso a Google Drive."
+    },
+    "progress": {
+      "step": "Paso {current} de {total}"
+    }
   }
 }

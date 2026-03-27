@@ -44,5 +44,152 @@
     "loading": "Loading...",
     "noResults": "No results",
     "required": "Required field"
+  },
+  "invoices": {
+    "title": "Invoices",
+    "newInvoice": "New invoice",
+    "empty": "No invoices yet",
+    "emptySubtitle": "Create your first invoice to get started",
+    "search": "Search by client or number",
+    "filterState": "Status",
+    "filterQuarter": "Quarter",
+    "allStates": "All",
+    "allQuarters": "All",
+    "states": {
+      "draft": "Draft",
+      "issued": "Issued",
+      "paid": "Paid",
+      "rectified": "Rectified"
+    },
+    "quarters": {
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4"
+    },
+    "form": {
+      "title": "New invoice",
+      "issuerSection": "Issuer",
+      "issuerName": "Name / Company name",
+      "issuerNif": "Tax ID",
+      "issuerAddress": "Fiscal address",
+      "clientSection": "Client",
+      "clientName": "Client name",
+      "clientNif": "Client tax ID",
+      "clientAddress": "Client address",
+      "clientType": "Client type",
+      "individual": "Individual",
+      "business": "Business / Professional",
+      "serviceSection": "Service",
+      "description": "Service description",
+      "amount": "Amount (€)",
+      "issueDate": "Issue date",
+      "simplificada": "Simplified invoice",
+      "simplificadaHint": "Available for amounts ≤ €400",
+      "summarySection": "Summary",
+      "baseAmount": "Base amount",
+      "ivaExempt": "VAT exempt — Art. 20 LIVA",
+      "ivaRate": "VAT (21%)",
+      "irpfLabel": "IRPF ({rate}%)",
+      "total": "Total",
+      "issueButton": "Issue invoice",
+      "issuing": "Issuing...",
+      "saveAsDraft": "Save as draft",
+      "rectificaBanner": "Correction of {number}",
+      "correctionReason": "Reason for correction",
+      "correctionReasonPlaceholder": "Describe the reason for this correction"
+    },
+    "detail": {
+      "viewPdf": "View PDF",
+      "markPaid": "Mark as paid",
+      "issueRectificativa": "Issue correction",
+      "issueInvoice": "Issue invoice",
+      "issuedAt": "Issue date",
+      "paidAt": "Payment date"
+    },
+    "errors": {
+      "loadFailed": "Could not load invoices",
+      "saveFailed": "Could not save invoice",
+      "pdfFailed": "Could not generate PDF",
+      "uploadFailed": "Could not upload PDF to Drive",
+      "retry": "Retry"
+    }
+  },
+  "dashboard": {
+    "greeting": "Hello, {name}",
+    "irpfCard": {
+      "label": "IRPF estimate",
+      "quarter": "Q{quarter} {year}",
+      "disclaimer": "Rough estimate only. Confirm with your accountant."
+    },
+    "deadlineCard": {
+      "label": "Next deadline",
+      "q1": "Modelo 130 — Q1",
+      "q2": "Modelo 130 — Q2",
+      "q3": "Modelo 130 — Q3",
+      "q4": "Modelo 130 — Q4",
+      "daysRemaining": "{days} days"
+    },
+    "appointments": {
+      "title": "Pending appointments",
+      "empty": "No pending appointments",
+      "seeAll": "See all"
+    },
+    "quarterSummary": {
+      "income": "Income",
+      "expenses": "Expenses"
+    },
+    "quickActions": {
+      "newInvoice": "New invoice",
+      "scanReceipt": "Scan receipt",
+      "upgradeRequired": "Paid feature",
+      "upgradeMessage": "Upgrade your plan to automatically scan receipts.",
+      "upgradeCta": "View plans"
+    },
+    "error": "Could not refresh data",
+    "retry": "Retry"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Choose your language",
+      "subtitle": "You can change this later in settings"
+    },
+    "step2": {
+      "title": "Connect your Google account",
+      "subtitle": "Autonomas needs access to Google Drive and Google Calendar to work",
+      "driveExplain": "We securely save your invoices and expenses in your own Google Drive. Nobody else has access.",
+      "calendarExplain": "We sync your appointments with Google Calendar so you're always up to date.",
+      "continueButton": "Continue",
+      "signInButton": "Continue with Google",
+      "driveError": "We need Google Drive access to save your invoices.",
+      "grantPermission": "Grant permission"
+    },
+    "step3": {
+      "title": "Tell us about your activity",
+      "subtitle": "This allows us to calculate your taxes correctly",
+      "activityTitle": "Activity type",
+      "medicalTitle": "Medical / healthcare services",
+      "medicalDescription": "VAT-exempt — no quarterly VAT return",
+      "otherTitle": "Other professional services",
+      "otherDescription": "21% VAT — quarterly VAT return required",
+      "irpfTitle": "Income tax withholding (IRPF)",
+      "irpf15Title": "15% — Standard rate",
+      "irpf15Description": "For freelancers with more than 3 years of activity",
+      "irpf7Title": "7% — New freelancer",
+      "irpf7Description": "For the first 3 years of activity",
+      "irpfTooltipTrigger": "Which applies to me?",
+      "irpfTooltipBody": "The reduced 7% rate is available to freelancers registering for the first time, or who have not been active in the last 2 years. It applies for the first 3 years.",
+      "ctaButton": "Get started",
+      "loading": "Setting up your space..."
+    },
+    "error": {
+      "title": "We couldn't set up your space",
+      "retryButton": "Retry",
+      "grantPermissionButton": "Grant Google Drive access",
+      "drivePermission": "Check that you have granted Google Drive access."
+    },
+    "progress": {
+      "step": "Step {current} of {total}"
+    }
   }
 }
