@@ -149,6 +149,86 @@
     "error": "Could not refresh data",
     "retry": "Retry"
   },
+  "appointments": {
+    "title": "Appointments",
+    "newAppointment": "New appointment",
+    "empty": "No appointments yet",
+    "emptySubtitle": "Set up your availability and share your booking link",
+    "setupAvailability": "Set up availability",
+    "allStatuses": "All",
+    "statuses": {
+      "pending": "Pending",
+      "invoiced": "Invoiced",
+      "cancelled": "Cancelled"
+    },
+    "calendarErrorBanner": "Appointment saved but could not be added to calendar.",
+    "cancelAppointment": "Cancel appointment",
+    "createInvoice": "Create invoice",
+    "setup": {
+      "title": "Set up availability",
+      "subtitle": "Define your schedule and booking link",
+      "workingHours": "Working hours",
+      "slotDuration": "Appointment duration",
+      "slotDurationLabel": "{minutes} minutes",
+      "blockedDates": "Blocked dates",
+      "blockedDatesHint": "Select days when you will not be available",
+      "from": "From",
+      "to": "To",
+      "days": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      },
+      "bookingUrl": "Your booking link",
+      "bookingUrlHint": "Share this link with your patients",
+      "slugLabel": "URL identifier",
+      "slugHint": "Lowercase letters and hyphens only",
+      "slugTaken": "This link is already taken. Try: {suggestion}",
+      "saveButton": "Save availability",
+      "saving": "Saving...",
+      "saved": "Availability saved"
+    }
+  },
+  "booking": {
+    "title": "Book appointment",
+    "doctorTitle": "Doctor / Professional",
+    "selectDate": "Select a date",
+    "selectSlot": "Select a time",
+    "noSlotsAvailable": "No available slots for this day",
+    "patientForm": {
+      "title": "Your details",
+      "name": "Full name",
+      "namePlaceholder": "Your full name",
+      "email": "Email address",
+      "emailPlaceholder": "you@email.com",
+      "nif": "Tax ID (optional)",
+      "nifPlaceholder": "12345678A",
+      "privacyNote": "Your data is used solely to manage your appointment and generate the invoice.",
+      "confirmButton": "Confirm appointment",
+      "confirming": "Confirming..."
+    },
+    "confirmation": {
+      "title": "Appointment confirmed!",
+      "subtitle": "We have sent a confirmation to your email",
+      "details": "Your appointment details",
+      "doctor": "Doctor",
+      "date": "Date",
+      "time": "Time"
+    },
+    "errors": {
+      "slotTaken": "This slot is no longer available, please choose another.",
+      "generic": "Could not confirm the appointment. Please try again.",
+      "pageNotFound": "This booking page does not exist."
+    },
+    "langToggle": {
+      "es": "ES",
+      "en": "EN"
+    }
+  },
   "onboarding": {
     "step1": {
       "title": "Choose your language",

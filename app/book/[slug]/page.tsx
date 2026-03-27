@@ -1,53 +1,55 @@
-"use client";
+import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import { resolveSlug } from "@/lib/redis-slug";
+import { getCachedSettings, setCachedSettings } from "@/lib/redis-settings-cache";
+import { BookingPageClient } from "./BookingPageClient";
 
-import { useState } from "react";
-import { NextIntlClientProvider } from "next-intl";
-import esMessages from "@/messages/es.json";
-import enMessages from "@/messages/en.json";
-import { Button } from "@/components/ui/button";
+interface Settings {
+  name?: string;
+  professionalTitle?: string;
+  bookingSlug?: string;
+  [key: string]: unknown;
+}
 
-const messages = { es: esMessages, en: enMessages };
+async function getSettings(userId: string): Promise<Settings | null> {
+  const cached = await getCachedSettings<Settings>(userId);
+  if (cached) return cached;
+  // Drive read not available on public page (no doctor token).
+  // Settings are populated into cache by the doctor's app on availability save.
+  return null;
+}
 
-export default function BookingPage({
+export default async function BookSlugPage({
   params,
+  searchParams,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string }>;
 }) {
-  const [locale, setLocale] = useState<"es" | "en">("es");
+  const { slug } = await params;
+  const { lang: langParam } = await searchParams;
+
+  const userId = await resolveSlug(slug);
+  if (!userId) notFound();
+
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get("booking-lang")?.value;
+  const lang: "es" | "en" =
+    langParam === "en" || cookieLang === "en" ? "en" : "es";
+
+  const settings = await getSettings(userId);
+  const doctorName = settings?.name ?? slug;
+  const doctorTitle =
+    settings?.professionalTitle ??
+    (lang === "es" ? "Médico / Professional" : "Doctor / Professional");
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages[locale]}>
-      <div className="min-h-screen bg-background p-6">
-        <div className="mx-auto max-w-lg space-y-6">
-          {/* Locale toggle */}
-          <div className="flex justify-end gap-2">
-            <Button
-              variant={locale === "es" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setLocale("es")}
-            >
-              ES
-            </Button>
-            <Button
-              variant={locale === "en" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setLocale("en")}
-            >
-              EN
-            </Button>
-          </div>
-
-          <h1 className="text-2xl font-semibold text-foreground">
-            {locale === "es" ? "Reservar cita" : "Book appointment"}
-          </h1>
-          <p className="text-muted-foreground">
-            {locale === "es"
-              ? "Selecciona un horario disponible."
-              : "Select an available time slot."}
-          </p>
-          <p className="text-xs text-muted-foreground">Slot: {params.slug}</p>
-        </div>
-      </div>
-    </NextIntlClientProvider>
+    <BookingPageClient
+      slug={slug}
+      userId={userId}
+      doctorName={doctorName}
+      doctorTitle={doctorTitle}
+      initialLang={lang}
+    />
   );
 }

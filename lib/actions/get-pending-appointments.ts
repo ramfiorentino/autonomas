@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { redis } from "@/lib/kv";
+import { getBookings } from "@/lib/redis-booking";
 
 export interface PendingAppointment {
   id: string;
@@ -16,13 +16,8 @@ export interface PendingAppointmentsResult {
   hasMore: boolean;
 }
 
-/**
- * Returns booked appointments (not yet invoiced) for the current user,
- * sorted by date ascending, limited to 5 (with hasMore if more exist).
- *
- * Keys follow the pattern: bookings:{userId}:{YYYY-MM}
- * Returns empty list gracefully if no bookings exist yet (booking feature not yet shipped).
- */
+const LIMIT = 6;
+
 export async function getPendingAppointments(): Promise<PendingAppointmentsResult> {
   const session = await auth();
   if (!session?.user?.id) {
@@ -32,28 +27,33 @@ export async function getPendingAppointments(): Promise<PendingAppointmentsResul
   const userId = session.user.id;
 
   try {
-    // Scan for all booking keys for this user
     const now = new Date();
     const months: string[] = [];
-    // Check current month and next 2 months for upcoming appointments
+    // Current month + next 2 months for upcoming pending appointments
     for (let i = 0; i < 3; i++) {
       const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
       const mm = String(d.getMonth() + 1).padStart(2, "0");
-      months.push(`bookings:${userId}:${d.getFullYear()}-${mm}`);
+      months.push(`${d.getFullYear()}-${mm}`);
     }
 
     const results = await Promise.all(
-      months.map((key) => redis.lrange<PendingAppointment>(key, 0, -1)),
+      months.map((ym) => getBookings(userId, ym)),
     );
 
-    const allBooked = results
+    const pending = results
       .flat()
-      .filter((a) => a && a.status === "booked")
+      .filter((b) => b.status === "pending")
       .sort((a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime());
 
-    const hasMore = allBooked.length > 5;
+    const hasMore = pending.length > LIMIT;
     return {
-      appointments: allBooked.slice(0, 5),
+      appointments: pending.slice(0, LIMIT).map((b) => ({
+        id: b.id,
+        patientName: b.patientName,
+        dateTime: b.dateTime,
+        appointmentType: b.appointmentType,
+        status: b.status,
+      })),
       hasMore,
     };
   } catch {

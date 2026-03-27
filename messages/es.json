@@ -149,6 +149,86 @@
     "error": "No se pudo actualizar los datos",
     "retry": "Reintentar"
   },
+  "appointments": {
+    "title": "Citas",
+    "newAppointment": "Nueva cita",
+    "empty": "Todavía no tienes citas",
+    "emptySubtitle": "Configura tu disponibilidad y comparte tu enlace de reserva",
+    "setupAvailability": "Configurar disponibilidad",
+    "allStatuses": "Todas",
+    "statuses": {
+      "pending": "Pendiente",
+      "invoiced": "Facturada",
+      "cancelled": "Cancelada"
+    },
+    "calendarErrorBanner": "Cita guardada pero no se pudo añadir al calendario.",
+    "cancelAppointment": "Cancelar cita",
+    "createInvoice": "Crear factura",
+    "setup": {
+      "title": "Configurar disponibilidad",
+      "subtitle": "Define tus horarios y tu enlace de reserva",
+      "workingHours": "Horario de trabajo",
+      "slotDuration": "Duración de cada cita",
+      "slotDurationLabel": "{minutes} minutos",
+      "blockedDates": "Fechas bloqueadas",
+      "blockedDatesHint": "Selecciona días en los que no estarás disponible",
+      "from": "Desde",
+      "to": "Hasta",
+      "days": {
+        "mon": "Lunes",
+        "tue": "Martes",
+        "wed": "Miércoles",
+        "thu": "Jueves",
+        "fri": "Viernes",
+        "sat": "Sábado",
+        "sun": "Domingo"
+      },
+      "bookingUrl": "Tu enlace de reserva",
+      "bookingUrlHint": "Comparte este enlace con tus pacientes",
+      "slugLabel": "Identificador",
+      "slugHint": "Solo letras minúsculas y guiones",
+      "slugTaken": "Este enlace ya está en uso. Prueba con: {suggestion}",
+      "saveButton": "Guardar disponibilidad",
+      "saving": "Guardando...",
+      "saved": "Disponibilidad guardada"
+    }
+  },
+  "booking": {
+    "title": "Reservar cita",
+    "doctorTitle": "Médico / Professional",
+    "selectDate": "Selecciona una fecha",
+    "selectSlot": "Selecciona una hora",
+    "noSlotsAvailable": "No hay horas disponibles para este día",
+    "patientForm": {
+      "title": "Tus datos",
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre y apellidos",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "nif": "NIF (opcional)",
+      "nifPlaceholder": "12345678A",
+      "privacyNote": "Tus datos se usan únicamente para gestionar tu cita y generar la factura.",
+      "confirmButton": "Confirmar cita",
+      "confirming": "Confirmando..."
+    },
+    "confirmation": {
+      "title": "¡Cita confirmada!",
+      "subtitle": "Hemos enviado la confirmación a tu correo",
+      "details": "Detalles de tu cita",
+      "doctor": "Médico",
+      "date": "Fecha",
+      "time": "Hora"
+    },
+    "errors": {
+      "slotTaken": "Esta hora ya no está disponible, elige otra.",
+      "generic": "No se pudo confirmar la cita. Inténtalo de nuevo.",
+      "pageNotFound": "Esta página de reserva no existe."
+    },
+    "langToggle": {
+      "es": "ES",
+      "en": "EN"
+    }
+  },
   "onboarding": {
     "step1": {
       "title": "Elige tu idioma",
