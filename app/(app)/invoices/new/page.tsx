@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { calculateInvoice } from "@/lib/invoice-calc";
 import { getNextInvoiceNumber } from "@/lib/invoice-numbering";
@@ -76,6 +76,7 @@ function NewInvoiceInner() {
   const appointmentType = searchParams.get("appointmentType") ?? "";
   const dateTime = searchParams.get("dateTime") ?? "";
   const rectificaId = searchParams.get("rectificaId") ?? "";
+  const patientNif = searchParams.get("patientNif") ?? "";
 
   // Settings from Drive
   const [activityType, setActivityType] = useState<"medical" | "other">("other");
@@ -89,7 +90,7 @@ function NewInvoiceInner() {
 
   // Client
   const [clientName, setClientName] = useState(patientName);
-  const [clientNif, setClientNif] = useState("");
+  const [clientNif, setClientNif] = useState(patientNif);
   const [clientAddress, setClientAddress] = useState("");
   const [clientType, setClientType] = useState<ClientType>("individual");
 
@@ -109,6 +110,10 @@ function NewInvoiceInner() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorStep, setErrorStep] = useState<string>("");
+  // Idempotent retry: cache the in-progress invoice + uploaded pdfPath so a
+  // save failure doesn't cause a second PDF to be uploaded on retry.
+  const [pendingInvoice, setPendingInvoice] = useState<Invoice | null>(null);
+  const [uploadedPdfPath, setUploadedPdfPath] = useState<string | null>(null);
 
   // Load settings and handle rectificaId
   useEffect(() => {
@@ -171,52 +176,63 @@ function NewInvoiceInner() {
     setError(null);
 
     try {
-      // Get all invoices for number generation
-      const allInvoices = await getInvoices();
-      const year = new Date(issueDate).getFullYear();
-      const number = getNextInvoiceNumber(allInvoices, year);
+      let invoiceToSave: Invoice;
 
-      const newInvoice: Invoice = {
-        id: crypto.randomUUID(),
-        number,
-        state: "issued",
-        issuerName,
-        issuerNif,
-        issuerAddress,
-        client: {
-          name: clientName,
-          nif: simplificada ? "" : clientNif,
-          address: simplificada ? "" : clientAddress,
-          type: clientType,
-        },
-        line: { description, amount: baseAmount },
-        issueDate,
-        ivaType: calc.ivaType,
-        ivaRate: calc.ivaRate,
-        ivaAmount: calc.ivaAmount,
-        irpfRate: calc.irpfRate,
-        irpfAmount: calc.irpfAmount,
-        total: calc.total,
-        simplificada,
-        issuedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        ...(rectificaId && { rectificaRef: rectificaId, correctionReason }),
-      };
+      if (pendingInvoice && uploadedPdfPath) {
+        // Retry path: PDF already uploaded — skip steps 1 & 2
+        invoiceToSave = pendingInvoice;
+      } else {
+        // First attempt: build invoice, generate PDF, upload
+        const allInvoices = await getInvoices();
+        const year = new Date(issueDate).getFullYear();
+        const number = getNextInvoiceNumber(allInvoices, year);
 
-      // Step 1: Generate PDF
-      setErrorStep("pdf");
-      const blob = await generateInvoicePdf(newInvoice);
-      const base64 = await blobToBase64(blob);
+        invoiceToSave = {
+          id: crypto.randomUUID(),
+          number,
+          state: "issued",
+          issuerName,
+          issuerNif,
+          issuerAddress,
+          client: {
+            name: clientName,
+            nif: simplificada ? "" : clientNif,
+            address: simplificada ? "" : clientAddress,
+            type: clientType,
+          },
+          line: { description, amount: baseAmount },
+          issueDate,
+          ivaType: calc.ivaType,
+          ivaRate: calc.ivaRate,
+          ivaAmount: calc.ivaAmount,
+          irpfRate: calc.irpfRate,
+          irpfAmount: calc.irpfAmount,
+          total: calc.total,
+          simplificada,
+          issuedAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          ...(rectificaId && { rectificaRef: rectificaId, correctionReason }),
+        };
 
-      // Step 2: Upload PDF to Drive
-      setErrorStep("upload");
-      const { pdfPath } = await uploadInvoicePdf(
-        base64,
-        number,
-        clientName,
-        issueDate,
-      );
-      newInvoice.pdfPath = pdfPath;
+        // Step 1: Generate PDF
+        setErrorStep("pdf");
+        const blob = await generateInvoicePdf(invoiceToSave);
+        const base64 = await blobToBase64(blob);
+
+        // Step 2: Upload PDF to Drive
+        setErrorStep("upload");
+        const { pdfPath } = await uploadInvoicePdf(
+          base64,
+          number,
+          clientName,
+          issueDate,
+        );
+        invoiceToSave.pdfPath = pdfPath;
+
+        // Cache for idempotent retry
+        setPendingInvoice(invoiceToSave);
+        setUploadedPdfPath(pdfPath);
+      }
 
       // Step 3: Save to income.json
       setErrorStep("save");
@@ -224,11 +240,11 @@ function NewInvoiceInner() {
       if (originalInvoice) {
         relatedUpdates.push({ ...originalInvoice, state: "rectified" });
       }
-      const result = await saveInvoice(newInvoice, relatedUpdates);
+      const result = await saveInvoice(invoiceToSave, relatedUpdates);
       if (!result.success) throw new Error(result.error);
 
       // Step 4: Navigate to detail
-      router.push(`/invoices/${newInvoice.id}`);
+      router.push(`/invoices/${invoiceToSave.id}`);
     } catch (err) {
       setLoading(false);
       const message = err instanceof Error ? err.message : "Unknown error";
@@ -252,6 +268,14 @@ function NewInvoiceInner() {
 
   return (
     <div className="p-4 pb-24 space-y-6">
+      <button
+        onClick={() => router.back()}
+        className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {t("form.back")}
+      </button>
+
       <h1 className="text-xl font-bold text-foreground">
         {rectificaId ? t("form.rectificaBanner", { number: originalInvoice?.number ?? "—" }) : t("form.title")}
       </h1>

@@ -22,6 +22,7 @@ function StatusBadge({ status }: { status: BookingStatus }) {
 export function AppointmentRow({ booking }: { booking: Booking }) {
   const router = useRouter();
   const locale = useLocale();
+  const t = useTranslations("appointments");
 
   const formattedDate = new Intl.DateTimeFormat(locale, {
     day: "2-digit",
@@ -36,6 +37,7 @@ export function AppointmentRow({ booking }: { booking: Booking }) {
       dateTime: booking.dateTime,
       appointmentType: booking.appointmentType,
       bookingId: booking.id,
+      ...(booking.patientNif ? { patientNif: booking.patientNif } : {}),
     });
     router.push(`/invoices/new?${params.toString()}`);
   }
@@ -57,7 +59,10 @@ export function AppointmentRow({ booking }: { booking: Booking }) {
         <p className="text-xs text-muted-foreground">{booking.appointmentType}</p>
       </div>
       {booking.status === "pending" && (
-        <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0 ml-3" />
+        <div className="flex items-center gap-1 flex-shrink-0 ml-3">
+          <span className="text-xs text-muted-foreground">{t("createInvoice")}</span>
+          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+        </div>
       )}
     </button>
   );

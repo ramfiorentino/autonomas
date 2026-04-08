@@ -8,7 +8,8 @@ export default auth((req) => {
   const isPublicRoute =
     pathname.startsWith("/login") ||
     pathname.startsWith("/book/") ||
-    pathname.startsWith("/api/auth/");
+    pathname.startsWith("/api/auth/") ||
+    pathname.startsWith("/api/book");
 
   if (!req.auth && !isPublicRoute) {
     const loginUrl = new URL("/login", req.url);

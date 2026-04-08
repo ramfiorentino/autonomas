@@ -68,6 +68,7 @@
       "q4": "Q4"
     },
     "form": {
+      "back": "Appointments",
       "title": "New invoice",
       "issuerSection": "Issuer",
       "issuerName": "Name / Company name",
@@ -142,6 +143,7 @@
     "quickActions": {
       "newInvoice": "New invoice",
       "scanReceipt": "Scan receipt",
+      "newExpense": "New expense",
       "upgradeRequired": "Paid feature",
       "upgradeMessage": "Upgrade your plan to automatically scan receipts.",
       "upgradeCta": "View plans"
@@ -155,6 +157,7 @@
     "empty": "No appointments yet",
     "emptySubtitle": "Set up your availability and share your booking link",
     "setupAvailability": "Set up availability",
+    "updateAvailability": "Update availability",
     "allStatuses": "All",
     "statuses": {
       "pending": "Pending",
@@ -227,6 +230,113 @@
     "langToggle": {
       "es": "ES",
       "en": "EN"
+    }
+  },
+  "upgrade": {
+    "title": "Autonomas Pro",
+    "featureDescription": "Unlock {feature} with Autonomas Pro.",
+    "planName": "Autonomas Pro",
+    "price": "€5",
+    "perMonth": "/mo",
+    "cta": "Activate Autonomas Pro",
+    "loading": "Redirecting..."
+  },
+  "subscription": {
+    "title": "Subscription",
+    "navLabel": "Subscription",
+    "planPaid": "Autonomas Pro",
+    "planFree": "Free plan",
+    "freeDescription": "Get access to all premium features for €5 per month.",
+    "statusActive": "Active",
+    "statusPastDue": "Payment due",
+    "amount": "Amount",
+    "nextBilling": "Next billing date",
+    "manageButton": "Manage subscription",
+    "upgradeCta": "Activate Autonomas Pro",
+    "successToast": "Welcome to Autonomas Pro!",
+    "loading": "Loading..."
+  },
+  "pastDue": {
+    "message": "There is a problem with your payment. Update your payment method to keep your access.",
+    "link": "Update payment method"
+  },
+  "emails": {
+    "monthly": {
+      "standardSubject": "Autonomas — Are your invoices up to date?",
+      "deadlineSubject": "Autonomas — Modelo 130 deadline: {date}",
+      "reminderTitle": "Monthly reminder",
+      "reminderBody": "Remember to review your invoices and log last month's expenses. Keeping your books up to date saves hours before each quarterly deadline.",
+      "deadlineTitle": "Upcoming Modelo 130 deadline",
+      "deadlineBody": "The {label} deadline is {date}. You have {days} days left to file.",
+      "ctaLabel": "Open Autonomas",
+      "unsubscribeText": "Don't want these reminders?",
+      "unsubscribeLink": "Unsubscribe",
+      "confirmationHeading": "You have been unsubscribed.",
+      "confirmationBody": "You will no longer receive monthly reminders from Autonomas.",
+      "errorHeading": "This link has expired or is invalid.",
+      "errorBody": "If you'd like to unsubscribe, email us at {email} and we'll handle it manually."
+    }
+  },
+  "expenses": {
+    "title": "Expenses",
+    "newExpenseTitle": "New expense",
+    "reviewTitle": "Review expense",
+    "editExpenseTitle": "Edit expense",
+    "search": "Search by vendor",
+    "empty": "No expenses yet",
+    "emptySubtitle": "Scan a receipt or add an expense manually",
+    "allCategories": "All",
+    "allQuarters": "All",
+    "addExpense": "Add expense",
+    "scanReceipt": "Scan receipt",
+    "newExpense": "New expense",
+    "manualEntry": "Manual entry",
+    "captureImage": "Capture image",
+    "captureHint": "Point the camera at your receipt",
+    "freeOnlyManual": "Manual entry is available for free. Upgrade to scan receipts.",
+    "scanningReceipt": "Analysing receipt...",
+    "retryCapture": "Retry",
+    "errorPreprocessing": "Could not process the image. Please try again.",
+    "errorOcr": "Could not read the receipt. Try again or enter the details manually.",
+    "receiptThumbnail": "Receipt thumbnail",
+    "tapToExpand": "Tap to expand",
+    "ticketSimplificadoNote": "Simplified receipt: the vendor's tax ID may not appear. Confirm deductibility with your accountant.",
+    "vehicleDeductibilityWarning": "Vehicle expenses are only partially deductible for most freelancers (50%). Check with your accountant.",
+    "savedSuccess": "Expense saved",
+    "saveFailed": "Could not save the expense. Please try again.",
+    "deletedSuccess": "Expense deleted",
+    "deleteFailed": "Could not delete the expense. Please try again.",
+    "saving": "Saving...",
+    "saveExpense": "Save expense",
+    "deleteExpense": "Delete expense",
+    "deleteConfirmTitle": "Delete this expense?",
+    "deleteConfirmMessage": "This action cannot be undone.",
+    "cancelDelete": "Cancel",
+    "confirmDelete": "Delete",
+    "notFound": "Expense not found",
+    "backToList": "Back to list",
+    "categories": {
+      "combustible": "Fuel / Vehicle",
+      "seguros": "Insurance",
+      "servicios": "Professional services",
+      "otros": "Other"
+    },
+    "quarters": {
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4"
+    },
+    "form": {
+      "vendor": "Vendor",
+      "vendorNif": "Vendor tax ID",
+      "date": "Date",
+      "total": "Total (€)",
+      "ivaRate": "VAT rate (%)",
+      "ivaAmount": "VAT amount (€)",
+      "baseImponible": "Base amount (€)",
+      "notes": "Notes",
+      "category": "Category"
     }
   },
   "onboarding": {

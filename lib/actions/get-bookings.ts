@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { getBookings } from "@/lib/redis-booking";
+import { getBookings, getAvailability } from "@/lib/redis-booking";
 import type { Booking } from "@/lib/types/booking";
 
 export async function getBookingsForCitasTab(): Promise<Booking[]> {
@@ -26,6 +26,13 @@ export async function getBookingsForCitasTab(): Promise<Booking[]> {
   return results
     .flat()
     .sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+}
+
+export async function hasAvailabilityConfigured(): Promise<boolean> {
+  const session = await auth();
+  if (!session?.user?.id) return false;
+  const availability = await getAvailability(session.user.id);
+  return availability !== null;
 }
 
 export async function cancelBooking(bookingId: string): Promise<{ success: boolean }> {

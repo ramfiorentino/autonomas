@@ -68,6 +68,7 @@
       "q4": "T4"
     },
     "form": {
+      "back": "Citas",
       "title": "Nueva factura",
       "issuerSection": "Emisor",
       "issuerName": "Nombre / Razón social",
@@ -142,6 +143,7 @@
     "quickActions": {
       "newInvoice": "Nueva factura",
       "scanReceipt": "Escanear recibo",
+      "newExpense": "Nuevo gasto",
       "upgradeRequired": "Función de pago",
       "upgradeMessage": "Actualiza tu plan para escanear recibos automáticamente.",
       "upgradeCta": "Ver planes"
@@ -155,6 +157,7 @@
     "empty": "Todavía no tienes citas",
     "emptySubtitle": "Configura tu disponibilidad y comparte tu enlace de reserva",
     "setupAvailability": "Configurar disponibilidad",
+    "updateAvailability": "Actualizar disponibilidad",
     "allStatuses": "Todas",
     "statuses": {
       "pending": "Pendiente",
@@ -227,6 +230,113 @@
     "langToggle": {
       "es": "ES",
       "en": "EN"
+    }
+  },
+  "upgrade": {
+    "title": "Autonomas Pro",
+    "featureDescription": "Desbloquea {feature} con Autonomas Pro.",
+    "planName": "Autonomas Pro",
+    "price": "€5",
+    "perMonth": "/mes",
+    "cta": "Activar Autonomas Pro",
+    "loading": "Redirigiendo..."
+  },
+  "subscription": {
+    "title": "Suscripción",
+    "navLabel": "Suscripción",
+    "planPaid": "Autonomas Pro",
+    "planFree": "Plan gratuito",
+    "freeDescription": "Accede a todas las funciones premium por €5 al mes.",
+    "statusActive": "Activa",
+    "statusPastDue": "Pago pendiente",
+    "amount": "Importe",
+    "nextBilling": "Próxima factura",
+    "manageButton": "Gestionar suscripción",
+    "upgradeCta": "Activar Autonomas Pro",
+    "successToast": "¡Bienvenida a Autonomas Pro!",
+    "loading": "Cargando..."
+  },
+  "pastDue": {
+    "message": "Hay un problema con tu pago. Actualiza tu método de pago para mantener el acceso.",
+    "link": "Actualizar método de pago"
+  },
+  "emails": {
+    "monthly": {
+      "standardSubject": "Autonomas — ¿Tienes tus facturas al día?",
+      "deadlineSubject": "Autonomas — Plazo Modelo 130: {date}",
+      "reminderTitle": "Recordatorio mensual",
+      "reminderBody": "Recuerda revisar tus facturas y registrar los gastos del mes pasado. Mantener las cuentas al día te ahorra horas de trabajo antes de cada plazo trimestral.",
+      "deadlineTitle": "Plazo Modelo 130 próximo",
+      "deadlineBody": "El plazo del {label} vence el {date}. Te quedan {days} días para presentarlo.",
+      "ctaLabel": "Abrir Autonomas",
+      "unsubscribeText": "¿No quieres recibir más recordatorios?",
+      "unsubscribeLink": "Darse de baja",
+      "confirmationHeading": "Te has dado de baja correctamente.",
+      "confirmationBody": "Ya no recibirás más recordatorios mensuales de Autonomas.",
+      "errorHeading": "Este enlace ha expirado o no es válido.",
+      "errorBody": "Si quieres darte de baja, escríbenos a {email} y lo gestionamos manualmente."
+    }
+  },
+  "expenses": {
+    "title": "Gastos",
+    "newExpenseTitle": "Nuevo gasto",
+    "reviewTitle": "Revisar gasto",
+    "editExpenseTitle": "Editar gasto",
+    "search": "Buscar por proveedor",
+    "empty": "Todavía no tienes gastos",
+    "emptySubtitle": "Escanea un recibo o añade un gasto manualmente",
+    "allCategories": "Todos",
+    "allQuarters": "Todos",
+    "addExpense": "Añadir gasto",
+    "scanReceipt": "Escanear recibo",
+    "newExpense": "Nuevo gasto",
+    "manualEntry": "Entrada manual",
+    "captureImage": "Capturar imagen",
+    "captureHint": "Apunta la cámara al recibo",
+    "freeOnlyManual": "La entrada manual está disponible gratis. Actualiza para escanear recibos.",
+    "scanningReceipt": "Analizando recibo...",
+    "retryCapture": "Reintentar",
+    "errorPreprocessing": "No se pudo procesar la imagen. Inténtalo de nuevo.",
+    "errorOcr": "No se pudo leer el recibo. Inténtalo de nuevo o introduce los datos manualmente.",
+    "receiptThumbnail": "Miniatura del recibo",
+    "tapToExpand": "Toca para ampliar",
+    "ticketSimplificadoNote": "Ticket simplificado: puede que el NIF del proveedor no aparezca. Confirma la deducibilidad con tu gestor.",
+    "vehicleDeductibilityWarning": "Los gastos de vehículo son parcialmente deducibles para la mayoría de autónomos (50%). Consulta con tu gestor.",
+    "savedSuccess": "Gasto guardado",
+    "saveFailed": "No se pudo guardar el gasto. Inténtalo de nuevo.",
+    "deletedSuccess": "Gasto eliminado",
+    "deleteFailed": "No se pudo eliminar el gasto. Inténtalo de nuevo.",
+    "saving": "Guardando...",
+    "saveExpense": "Guardar gasto",
+    "deleteExpense": "Eliminar gasto",
+    "deleteConfirmTitle": "¿Eliminar este gasto?",
+    "deleteConfirmMessage": "Esta acción no se puede deshacer.",
+    "cancelDelete": "Cancelar",
+    "confirmDelete": "Eliminar",
+    "notFound": "Gasto no encontrado",
+    "backToList": "Volver a la lista",
+    "categories": {
+      "combustible": "Combustible / Vehículo",
+      "seguros": "Seguros",
+      "servicios": "Servicios profesionales",
+      "otros": "Otros"
+    },
+    "quarters": {
+      "q1": "T1",
+      "q2": "T2",
+      "q3": "T3",
+      "q4": "T4"
+    },
+    "form": {
+      "vendor": "Proveedor",
+      "vendorNif": "NIF del proveedor",
+      "date": "Fecha",
+      "total": "Total (€)",
+      "ivaRate": "Tipo IVA (%)",
+      "ivaAmount": "Cuota IVA (€)",
+      "baseImponible": "Base imponible (€)",
+      "notes": "Notas",
+      "category": "Categoría"
     }
   },
   "onboarding": {

@@ -7,7 +7,8 @@ import { Settings, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AppointmentRow } from "@/components/appointments/AppointmentRow";
-import { getBookingsForCitasTab, cancelBooking } from "@/lib/actions/get-bookings";
+import { getBookingsForCitasTab, cancelBooking, hasAvailabilityConfigured } from "@/lib/actions/get-bookings";
+import { syncCalendarErrors } from "@/lib/actions/sync-calendar";
 import type { Booking, BookingStatus } from "@/lib/types/booking";
 
 type StatusFilter = "all" | BookingStatus;
@@ -20,12 +21,30 @@ export default function CitasPage() {
   const [loading, setLoading] = useState(true);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [filter, setFilter] = useState<StatusFilter>("all");
+  const [availabilitySet, setAvailabilitySet] = useState(false);
 
   useEffect(() => {
-    getBookingsForCitasTab().then((data) => {
-      setBookings(data);
-      setLoading(false);
-    });
+    Promise.all([getBookingsForCitasTab(), hasAvailabilityConfigured()]).then(
+      async ([data, hasAvailability]) => {
+        setBookings(data);
+        setAvailabilitySet(hasAvailability);
+        setLoading(false);
+
+        // Silently sync any pending calendar events in the background
+        const hasErrors = data.some((b) => b.calendarError && b.status === "pending");
+        if (hasErrors) {
+          const synced = await syncCalendarErrors();
+          if (synced.length > 0) {
+            setBookings((prev) =>
+              prev.map((b) => {
+                const fix = synced.find((s) => s.id === b.id);
+                return fix ?? b;
+              }),
+            );
+          }
+        }
+      },
+    );
   }, []);
 
   async function handleCancel(bookingId: string) {
@@ -97,7 +116,7 @@ export default function CitasPage() {
               onClick={() => router.push("/appointments/setup")}
               className="bg-primary text-white hover:bg-primary/90"
             >
-              {t("setupAvailability")}
+              {availabilitySet ? t("updateAvailability") : t("setupAvailability")}
             </Button>
           </div>
         ) : (

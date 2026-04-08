@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import { getSubscription } from "@/lib/subscription";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -29,10 +30,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.expires_at = account.expires_at;
       }
 
-      // Token refresh logic
+      // Always sync subscription tier/status from Redis
+      if (token.sub) {
+        const sub = await getSubscription(token.sub);
+        token.tier = sub.tier;
+        token.status = sub.status;
+      }
+
+      // Token refresh logic — return early if not expired or no expiry info
       if (
-        token.expires_at &&
-        typeof token.expires_at === "number" &&
+        !token.expires_at ||
+        typeof token.expires_at !== "number" ||
         Date.now() < token.expires_at * 1000
       ) {
         return token;
@@ -66,9 +74,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     },
     async session({ session, token }) {
+      if (token.sub) session.user.id = token.sub;
       session.access_token = token.access_token as string;
       session.refresh_token = token.refresh_token as string;
       session.error = token.error as string | undefined;
+      session.tier = (token.tier as "paid" | "free") ?? "free";
+      session.status = (token.status as "active" | "past_due" | "cancelled" | "free") ?? "free";
       return session;
     },
   },
@@ -80,5 +91,14 @@ declare module "next-auth" {
     access_token: string;
     refresh_token: string;
     error?: string;
+    tier: "paid" | "free";
+    status: "active" | "past_due" | "cancelled" | "free";
+  }
+}
+
+declare module "@auth/core/jwt" {
+  interface JWT {
+    tier?: "paid" | "free";
+    status?: "active" | "past_due" | "cancelled" | "free";
   }
 }

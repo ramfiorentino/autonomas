@@ -7,6 +7,7 @@ import { BottomNav } from "@/components/shell/BottomNav";
 import { Sidebar } from "@/components/shell/Sidebar";
 import { OfflineDetector } from "@/components/shell/OfflineDetector";
 import { SessionGuard } from "@/components/shell/SessionGuard";
+import { PastDueBanner } from "@/components/PastDueBanner";
 import { checkOnboarding } from "@/lib/actions/check-onboarding";
 
 async function getLocaleMessages(locale: Locale) {
@@ -52,7 +53,10 @@ export default async function AppLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div className="flex h-full min-h-screen flex-col md:flex-row">
         <Sidebar />
-        <main className="flex-1 overflow-auto pb-16 md:pb-0">{children}</main>
+        <main className="flex-1 overflow-auto pb-16 md:pb-0">
+            <PastDueBanner />
+            {children}
+          </main>
         <BottomNav />
       </div>
       <OfflineDetector />

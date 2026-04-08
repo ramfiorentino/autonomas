@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, CalendarDays, FileText, Receipt } from "lucide-react";
+import { Home, CalendarDays, FileText, Receipt, CreditCard } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const navItems = [
@@ -15,6 +15,7 @@ const navItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const t = useTranslations("nav");
+  const tSub = useTranslations("subscription");
 
   return (
     <aside className="hidden md:flex w-56 flex-col border-r border-border bg-surface">
@@ -40,6 +41,19 @@ export function Sidebar() {
           );
         })}
       </nav>
+      <div className="border-t border-border p-3">
+        <Link
+          href="/settings/subscription"
+          className={`flex items-center gap-3 rounded-button px-3 py-2.5 text-sm font-medium transition-colors ${
+            pathname.startsWith("/settings/subscription")
+              ? "bg-primary-light text-primary"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+          }`}
+        >
+          <CreditCard className="h-5 w-5 shrink-0" />
+          <span>{tSub("navLabel")}</span>
+        </Link>
+      </div>
     </aside>
   );
 }

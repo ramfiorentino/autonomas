@@ -23,6 +23,8 @@ async function createCalendarEvent(
   const startDateTime = `${date}T${slot.start}:00`;
   const endDateTime = `${date}T${slot.end}:00`;
 
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(patient.email);
+
   const event = {
     summary: `Consulta — ${patient.name}`,
     description: [
@@ -33,11 +35,17 @@ async function createCalendarEvent(
       .join("\n"),
     start: { dateTime: startDateTime, timeZone: "Europe/Madrid" },
     end: { dateTime: endDateTime, timeZone: "Europe/Madrid" },
-    attendees: [{ email: patient.email }],
+    ...(isValidEmail ? { attendees: [{ email: patient.email }] } : {}),
+    conferenceData: {
+      createRequest: {
+        requestId: crypto.randomUUID(),
+        conferenceSolutionKey: { type: "hangoutsMeet" },
+      },
+    },
   };
 
   const res = await fetch(
-    "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+    "https://www.googleapis.com/calendar/v3/calendars/primary/events?conferenceDataVersion=1",
     {
       method: "POST",
       headers: {
